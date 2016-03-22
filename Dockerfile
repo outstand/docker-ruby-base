@@ -1,4 +1,4 @@
-FROM ruby:2.1
+FROM ruby:2.2
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
 # grab gosu and dumb-init
