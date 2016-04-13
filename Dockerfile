@@ -26,4 +26,5 @@ RUN apk add --no-cache \
     nodejs \
     mysql-client \
     redis \
-    jq
+    jq \
+    git
