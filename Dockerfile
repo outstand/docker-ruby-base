@@ -6,7 +6,8 @@ MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 ENV DOCKER_BASE_VERSION=0.0.4
 
 # Set up certificates and base tools
-RUN apk add --no-cache ca-certificates gnupg && \
+RUN apk upgrade --no-cache && \
+    apk add --no-cache ca-certificates gnupg && \
     gpg --recv-keys 51852D87348FFC4C && \
     mkdir -p /tmp/build && \
     cd /tmp/build && \
