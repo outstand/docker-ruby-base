@@ -21,6 +21,9 @@ RUN mkdir -p /tmp/build && \
     rm -rf /tmp/build && \
     rm -rf /root/.gnupg
 
+# Use dapper to build fsconsul from https://github.com/Cimpress-MCP/fsconsul
+COPY fsconsul /bin/fsconsul
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     locales \
     nodejs \
