@@ -18,6 +18,7 @@ RUN apk add --no-cache ca-certificates gnupg && \
     grep dumb-init_${DUMB_INIT_VERSION}_amd64$ sha256sums | sha256sum -c && \
     chmod +x dumb-init_${DUMB_INIT_VERSION}_amd64 && \
     cp dumb-init_${DUMB_INIT_VERSION}_amd64 /bin/dumb-init && \
+    ln -s /bin/dumb-init /usr/bin/dumb-init && \
     cd /tmp && \
     rm -rf /tmp/build && \
     apk del gnupg && \
