@@ -1,27 +1,31 @@
-FROM ruby:2.2.4-alpine
+FROM ruby:2.2.5-alpine
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
-# This is the release of https://github.com/hashicorp/docker-base to pull in order
-# to provide HashiCorp-built versions of basic utilities like dumb-init and gosu.
-ENV DOCKER_BASE_VERSION=0.0.4
+ENV GOSU_VERSION 1.9
+ENV DUMB_INIT_VERSION 1.0.2
 
-# Set up certificates and base tools
-RUN apk upgrade --no-cache && \
-    apk add --no-cache ca-certificates gnupg && \
-    gpg --recv-keys 51852D87348FFC4C && \
+RUN apk add --no-cache ca-certificates gnupg && \
     mkdir -p /tmp/build && \
     cd /tmp/build && \
-    wget https://releases.hashicorp.com/docker-base/${DOCKER_BASE_VERSION}/docker-base_${DOCKER_BASE_VERSION}_linux_amd64.zip && \
-    wget https://releases.hashicorp.com/docker-base/${DOCKER_BASE_VERSION}/docker-base_${DOCKER_BASE_VERSION}_SHA256SUMS && \
-    wget https://releases.hashicorp.com/docker-base/${DOCKER_BASE_VERSION}/docker-base_${DOCKER_BASE_VERSION}_SHA256SUMS.sig && \
-    gpg --verify docker-base_${DOCKER_BASE_VERSION}_SHA256SUMS.sig && \
-    grep ${DOCKER_BASE_VERSION}_linux_amd64.zip docker-base_${DOCKER_BASE_VERSION}_SHA256SUMS | sha256sum -c && \
-    unzip docker-base_${DOCKER_BASE_VERSION}_linux_amd64.zip && \
-    cp bin/gosu bin/dumb-init /bin && \
+    gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 && \
+    curl -o gosu -SL "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64" && \
+    curl -o gosu.asc -SL "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64.asc" && \
+    gpg --verify gosu.asc && \
+    chmod +x gosu && \
+    cp gosu /bin/gosu && \
+    wget https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64 && \
+    wget https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/sha256sums && \
+    grep dumb-init_${DUMB_INIT_VERSION}_amd64$ sha256sums | sha256sum -c && \
+    chmod +x dumb-init_${DUMB_INIT_VERSION}_amd64 && \
+    cp dumb-init_${DUMB_INIT_VERSION}_amd64 /bin/dumb-init && \
+    ln -s /bin/dumb-init /usr/bin/dumb-init && \
     cd /tmp && \
     rm -rf /tmp/build && \
     apk del gnupg && \
     rm -rf /root/.gnupg
+
+# Use dapper to build fsconsul from https://github.com/Cimpress-MCP/fsconsul
+COPY fsconsul /bin/fsconsul
 
 RUN apk add --no-cache \
     nodejs \
@@ -29,3 +33,4 @@ RUN apk add --no-cache \
     redis \
     jq \
     git
+
