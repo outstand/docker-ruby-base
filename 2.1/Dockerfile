@@ -27,9 +27,6 @@ COPY fsconsul /bin/fsconsul
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     locales \
-    nodejs \
-    mysql-client \
-    redis-tools \
     jq \
   && rm -rf /var/lib/apt/lists/*
 
