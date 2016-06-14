@@ -28,8 +28,5 @@ RUN apk add --no-cache ca-certificates gnupg && \
 COPY fsconsul /bin/fsconsul
 
 RUN apk add --no-cache \
-    nodejs \
-    mysql-client \
-    redis \
     jq \
     git
