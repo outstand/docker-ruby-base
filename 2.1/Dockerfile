@@ -1,8 +1,8 @@
-FROM ruby:2.1.9
+FROM ruby:2.1.10
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
 ENV GOSU_VERSION 1.9
-ENV DUMB_INIT_VERSION 1.1.1
+ENV DUMB_INIT_VERSION 1.1.3
 
 RUN mkdir -p /tmp/build && \
     cd /tmp/build && \
