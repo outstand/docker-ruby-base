@@ -1,8 +1,8 @@
 FROM ruby:2.3.1
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
-ENV GOSU_VERSION 1.9
-ENV DUMB_INIT_VERSION 1.1.3
+ENV GOSU_VERSION 1.10
+ENV DUMB_INIT_VERSION 1.2.0
 
 RUN mkdir -p /tmp/build && \
     cd /tmp/build && \
@@ -35,3 +35,8 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+
+ENV BUNDLER_VERSION 1.13.4
+COPY upgrade_bundler.sh /usr/local/bin/
+RUN upgrade_bundler.sh && \
+      rm /usr/local/bin/upgrade_bundler.sh
