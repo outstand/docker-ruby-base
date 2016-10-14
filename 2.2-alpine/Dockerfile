@@ -1,8 +1,8 @@
 FROM ruby:2.2.5-alpine
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
-ENV GOSU_VERSION 1.9
-ENV DUMB_INIT_VERSION 1.1.3
+ENV GOSU_VERSION 1.10
+ENV DUMB_INIT_VERSION 1.2.0
 
 RUN apk add --no-cache ca-certificates gnupg openssl && \
     mkdir -p /tmp/build && \
@@ -31,3 +31,7 @@ RUN apk add --no-cache \
     jq \
     git
 
+ENV BUNDLER_VERSION 1.13.4
+COPY upgrade_bundler.sh /usr/local/bin/
+RUN upgrade_bundler.sh && \
+      rm /usr/local/bin/upgrade_bundler.sh
