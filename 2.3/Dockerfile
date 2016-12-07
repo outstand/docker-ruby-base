@@ -1,4 +1,4 @@
-FROM ruby:2.3.1
+FROM ruby:2.3.3
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
 ENV GOSU_VERSION 1.10
@@ -36,7 +36,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ENV BUNDLER_VERSION 1.13.4
-COPY upgrade_bundler.sh /usr/local/bin/
-RUN upgrade_bundler.sh && \
-      rm /usr/local/bin/upgrade_bundler.sh
+# ENV BUNDLER_VERSION 1.13.4
+# COPY upgrade_bundler.sh /usr/local/bin/
+# RUN upgrade_bundler.sh && \
+#       rm /usr/local/bin/upgrade_bundler.sh

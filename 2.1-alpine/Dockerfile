@@ -31,7 +31,7 @@ RUN apk add --no-cache \
     jq \
     git
 
-ENV BUNDLER_VERSION 1.13.4
-COPY upgrade_bundler.sh /usr/local/bin/
-RUN upgrade_bundler.sh && \
-      rm /usr/local/bin/upgrade_bundler.sh
+# ENV BUNDLER_VERSION 1.13.4
+# COPY upgrade_bundler.sh /usr/local/bin/
+# RUN upgrade_bundler.sh && \
+#       rm /usr/local/bin/upgrade_bundler.sh
