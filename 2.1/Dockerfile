@@ -19,7 +19,7 @@ RUN mkdir -p /tmp/build && \
     chmod +x dumb-init_${DUMB_INIT_VERSION}_amd64 && \
     cp dumb-init_${DUMB_INIT_VERSION}_amd64 /bin/dumb-init && \
     ln -s /bin/dumb-init /usr/bin/dumb-init && \
-    curl https://keybase.io/outstand/pgp_keys.asc | gpg --import && \
+    wget -O - https://keybase.io/outstand/pgp_keys.asc | gpg --import && \
     wget -O fsconsul "https://s3.amazonaws.com/outstand-publish/fsconsul-${FSCONSUL_VERSION}" && \
     wget -O fsconsul.asc "https://s3.amazonaws.com/outstand-publish/fsconsul-${FSCONSUL_VERSION}.asc" && \
     gpg --verify fsconsul.asc && \
