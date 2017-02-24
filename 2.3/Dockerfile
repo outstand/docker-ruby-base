@@ -3,6 +3,7 @@ MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
 ENV GOSU_VERSION 1.10
 ENV DUMB_INIT_VERSION 1.2.0
+ENV FSCONSUL_VERSION 0.6.4.1
 
 RUN mkdir -p /tmp/build && \
     cd /tmp/build && \
@@ -18,12 +19,15 @@ RUN mkdir -p /tmp/build && \
     chmod +x dumb-init_${DUMB_INIT_VERSION}_amd64 && \
     cp dumb-init_${DUMB_INIT_VERSION}_amd64 /bin/dumb-init && \
     ln -s /bin/dumb-init /usr/bin/dumb-init && \
+    wget -O - https://keybase.io/outstand/pgp_keys.asc | gpg --import && \
+    wget -O fsconsul "https://s3.amazonaws.com/outstand-publish/fsconsul-${FSCONSUL_VERSION}" && \
+    wget -O fsconsul.asc "https://s3.amazonaws.com/outstand-publish/fsconsul-${FSCONSUL_VERSION}.asc" && \
+    gpg --verify fsconsul.asc && \
+    chmod +x fsconsul && \
+    cp fsconsul /bin/fsconsul && \
     cd /tmp && \
     rm -rf /tmp/build && \
     rm -rf /root/.gnupg
-
-# Use dapper to build fsconsul from https://github.com/Cimpress-MCP/fsconsul
-COPY fsconsul /bin/fsconsul
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     locales \
@@ -35,8 +39,3 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-
-# ENV BUNDLER_VERSION 1.13.4
-# COPY upgrade_bundler.sh /usr/local/bin/
-# RUN upgrade_bundler.sh && \
-#       rm /usr/local/bin/upgrade_bundler.sh
