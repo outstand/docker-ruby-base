@@ -1,4 +1,4 @@
-FROM ruby:2.4.0-alpine
+FROM ruby:2.4.1-alpine
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
 ENV GOSU_VERSION 1.10
@@ -30,3 +30,7 @@ RUN apk add --no-cache ca-certificates wget gnupg openssl jq git bash && \
     rm -rf /tmp/build && \
     apk del gnupg && \
     rm -rf /root/.gnupg
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
