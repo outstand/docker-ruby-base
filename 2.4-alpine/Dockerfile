@@ -1,4 +1,4 @@
-FROM ruby:2.4.1-alpine
+FROM ruby:2.4.2-alpine
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
 ENV GOSU_VERSION 1.10
