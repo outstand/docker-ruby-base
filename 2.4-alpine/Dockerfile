@@ -1,6 +1,6 @@
 FROM outstand/fsconsul as fsconsul
 
-FROM ruby:2.4.5-alpine3.8
+FROM ruby:2.4.6-alpine3.9
 LABEL maintainer="Ryan Schlesinger <ryan@outstand.com>"
 
 COPY --from=fsconsul /bin/fsconsul /bin/
