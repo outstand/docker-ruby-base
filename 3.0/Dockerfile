@@ -2,7 +2,7 @@ FROM outstand/su-exec as su-exec
 FROM outstand/tini as tini
 FROM outstand/fsconsul as fsconsul
 
-FROM ruby:2.7.2-buster
+FROM ruby:3.0.0-preview2-buster
 LABEL maintainer="Ryan Schlesinger <ryan@outstand.com>"
 
 COPY --from=su-exec /sbin/su-exec /sbin/
