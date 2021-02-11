@@ -2,7 +2,7 @@ FROM outstand/su-exec as su-exec
 FROM outstand/tini as tini
 FROM outstand/fsconsul as fsconsul
 
-FROM ruby:3.0.0-preview2-buster
+FROM ruby:3.0.0-buster
 LABEL maintainer="Ryan Schlesinger <ryan@outstand.com>"
 
 COPY --from=su-exec /sbin/su-exec /sbin/
@@ -20,5 +20,5 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ENV BUNDLER_VERSION 2.1.4
+ENV BUNDLER_VERSION 2.2.8
 RUN gem install bundler -v ${BUNDLER_VERSION} -i /usr/local/lib/ruby/gems/$(ls /usr/local/lib/ruby/gems) --force
