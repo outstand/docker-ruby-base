@@ -2,7 +2,7 @@ FROM outstand/su-exec as su-exec
 FROM outstand/tini as tini
 FROM outstand/fsconsul as fsconsul
 
-FROM ruby:3.1.2-bullseye
+FROM ruby:3.1.3-bullseye
 LABEL maintainer="Ryan Schlesinger <ryan@outstand.com>"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -28,5 +28,5 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ENV BUNDLER_VERSION 2.3.22
+ENV BUNDLER_VERSION 2.3.26
 RUN gem install bundler -v ${BUNDLER_VERSION} -i /usr/local/lib/ruby/gems/$(ls /usr/local/lib/ruby/gems) --force
