@@ -2,7 +2,7 @@ FROM outstand/su-exec as su-exec
 FROM outstand/tini as tini
 FROM outstand/fsconsul as fsconsul
 
-FROM ruby:3.1.2-bullseye
+FROM ruby:3.2.0-bullseye
 LABEL maintainer="Ryan Schlesinger <ryan@outstand.com>"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
